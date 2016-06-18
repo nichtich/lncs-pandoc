@@ -1,4 +1,4 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{llncs}
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -7,12 +7,13 @@
 \usepackage{fixltx2e} % provides \textsubscript
 % use upquote if available, for straight quotes in verbatim environments
 
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 % lncs 
 \usepackage{makeidx}
-$if(institute)$
-\institute{$institute$, \\ \texttt{$email$}}
-$endif$
-
+\institute{$for(author)$$author.affiliation$$if(author.email)$\\
+  \email{$author.email$}$endif$$sep$ \and $endfor$}
 
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
@@ -49,12 +50,12 @@ $if(geometry)$
 $endif$
 $if(natbib)$
 \usepackage{natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+\bibliographystyle{splncs03}
 $endif$
 $if(biblatex)$
 \usepackage{biblatex}
-$if(biblio-files)$
-\bibliography{$biblio-files$}
+$if(bibliography)$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 $endif$
 $endif$
 $if(listings)$
@@ -145,7 +146,7 @@ $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
-\author{$for(author)$$author$$sep$ \and $endfor$}
+\author{$for(author)$$author.name$$sep$ \and $endfor$}
 \date{$date$}
 $for(header-includes)$
 $header-includes$
@@ -161,7 +162,7 @@ $abstract$
 
 % lncs keyword extension 
 $if(keywords)$
-\keywords{$keywords$}
+\keywords{$for(keywords)$$keywords$$sep$ $$\cdot$$ $endfor$}
 $endif$
 
 \end{abstract}
